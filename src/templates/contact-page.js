@@ -25,7 +25,7 @@ export const pageQuery = graphql`
 `
 
 const Contact = ({data}) => {
-  const { markdownRemark, site } = data // data.markdownRemark holds your post data
+  const { markdownRemark, site } = data // data.markdownRemark holds post data
   const { frontmatter, html } = markdownRemark
 
   return  (

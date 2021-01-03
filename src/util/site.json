@@ -1,12 +1,11 @@
 {
   "meta": {
-    "title": "Foundation",
+    "title": "Full Stack Engineering",
     "titleTemplate": "%s",
-    "description": "A starter to launch your blazing fast personal website and a blog, Built with Gatsby and Netlify CMS. Made with ❤ by Stackrole",
-    "siteUrl": "https://foundation.stackrole.com",
-    "image": "/assets/stackrole.png",
-    "iconimage": "/assets/stackrole.png",
-    "twitterUsername": "@stackrole"
+    "description": "Erik Whipp's personal website",
+    "siteUrl": "https://erikwhipp.net",
+    "image": "/assets/favicon.jpg",
+    "iconimage": "/assets/favicon.jpg"
   },
   "ga": "UA-XXXXXXXXX-X"
 }
