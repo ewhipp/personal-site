@@ -6,6 +6,7 @@ date: 2021-03-21 15:47
 description: How do you simplify you typescript software system? What are the
   different ways Software Engineers can leverage patterns to simplify the
   complexity in their systems?
+featuredImage: /assets/external-content.duckduckgo.com.png
 ---
 ## Problem Statement
 
