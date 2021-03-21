@@ -11,4 +11,4 @@ I am interested in solving hard problems through technology. This happens throug
 
 In my experience as a software engineer, I have led teams that follow extreme programming and test-driven development ideologies and others. I am absolutely an advocate for TDD and DDD in most instances and do my best to mentor and foster this kind of ideology. Without a tested application, how can we know if our application is doing what we expect it to everytime we deploy?
 
-I am currently in Washington DC working for ICANN and am looking for remote work.
+I am currently in Washington DC working for HG Insights on their Research and Development team.
