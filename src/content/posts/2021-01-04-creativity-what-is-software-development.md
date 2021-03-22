@@ -5,7 +5,7 @@ slug: creativity-what-is-software-development
 date: 2021-01-03 21:25
 description: What is Software Development, really? Is it as ingrained in the
   boring and mundane as society thinks? I disagree.
-featuredImage: /assets/bench-accounting-nvzvopqw0gc-unsplash.jpg
+featuredImage: ""
 ---
 My origins as a software engineer are not abnormal however, when I tell some people how I got into the field they are surprised. When I was younger, I was determined to work in the music or audio industry. Whether that was as a musician, an audio engineer, mixer, live performance, etc. I was determined that I’d be doing something creative. This all changed when I went to college for audio engineering and technology.
 
