@@ -6,11 +6,11 @@ date: 2021-03-21 15:47
 description: How do you simplify you typescript software system? What are the
   different ways Software Engineers can leverage patterns to simplify the
   complexity in their systems?
-featuredImage: /assets/external-content.duckduckgo.com.png
+featuredImage: ""
 ---
 ## Problem Statement
 
-The reusability of a system can lead a system to be either simply complex or unmaintainable and complicated. The key difference between these two is that a complex system could mold itself to many different types of inputs while a complex system is rigid and can be overwhelmed easily. In this blog, I want to explain a few processes for the implementation of simple reusability within a Typescript application and from there, I want to suggest methods that can be leveraged to reduce the complexity of adding to this framework.
+The reusability of a system can lead a system to be either simply complex or unmaintainable and complicated. The key difference between these two is that a complex system could mold itself to many different types of inputs while a complicated system is rigid and can be overwhelmed easily. In this blog, I want to explain a few processes for the implementation of simple reusability within a Typescript application and from there, I want to suggest methods that can be leveraged to reduce the complexity of adding to this framework.
 
 ## Factory Pattern
 
@@ -32,15 +32,13 @@ Before we dive into different approaches for the implementation, I'd like to fir
 
 1. Implementation class
 
-    This class is responsible for the fundamental business logic that we want to encapsulate in a separate class.
-
+   This class is responsible for the fundamental business logic that we want to encapsulate in a separate class.
 2. Factory class
 
-    This class is responsible for providing the ability to *retrieve* the implementation class based on an arbitrary input.
-
+   This class is responsible for providing the ability to *retrieve* the implementation class based on an arbitrary input.
 3. Caller class
 
-    This class is responsible for asking the Factory class for the specific implementation. This class acts as an entry into the fundamental business logic that could differ between implementation classes.
+   This class is responsible for asking the Factory class for the specific implementation. This class acts as an entry into the fundamental business logic that could differ between implementation classes.
 
 There are optional additions to the above which will we see in the coming approaches. However, at a foundational level, these are the only three pieces of functionality necessary to implement the Factory pattern.
 
@@ -66,79 +64,80 @@ Based on the above, we can have the following pieces of shared code:
 
 1. Constant class
 
-    The responsibility of this class will be a centralized area to hold the string values necessary to  retrieve the different implementations of this class.
+   The responsibility of this class will be a centralized area to hold the string values necessary to  retrieve the different implementations of this class.
 
-    - Implementation class for all strategies
-        - Code
+   * Implementation class for all strategies
 
-            ```tsx
-            class Constants {
-              static EXPERIMENTAL: string = 'experimental';
-              static DEFAULT: string = 'default';
-            }
-            ```
+     * Code
 
-        Explanation: Through static variables, we have the ability to reuse the different inputs that will return the different implementation classes
+       ```tsx
+       class Constants {
+         static EXPERIMENTAL: string = 'experimental';
+         static DEFAULT: string = 'default';
+       }
+       ```
 
+       Explanation: Through static variables, we have the ability to reuse the different inputs that will return the different implementation classes
 2. Implementation class
 
-    Regardless of the methodology we use for completing this example, the calling class to the factory class should not change - therefore, this can be considered shared code.
+   Regardless of the methodology we use for completing this example, the calling class to the factory class should not change - therefore, this can be considered shared code.
 
-    - Implementation class for the first two strategies
-        - Code
+   * Implementation class for the first two strategies
 
-            ```tsx
-            class ExperimentalFeature implements TypedFeature {
-              private message: string;
+     * Code
 
-                constructor(message: string) {
-                    this.message = message;    
-                }
-                
-                describeFeature() {
-                    console.log(`state=[experimental]\tmessage=[${this.message}]`);
-                }
-            }
+       ```tsx
+       class ExperimentalFeature implements TypedFeature {
+         private message: string;
 
-            // Implementation class Default
-            class DefaultFeature implements TypedFeature {
-               
-               private message: string;
+           constructor(message: string) {
+               this.message = message;    
+           }
+           
+           describeFeature() {
+               console.log(`state=[experimental]\tmessage=[${this.message}]`);
+           }
+       }
 
-                constructor(message: string) {
-                    this.message = message;
-                }
-                
-                describeFeature() {
-                    console.log(`state=[default]\tmessage=[${this.message}] will be defaulted.`);
-                }
-            }
+       // Implementation class Default
+       class DefaultFeature implements TypedFeature {
+          
+          private message: string;
 
-            // Implementation class Permission
-            class PermissionedFeature implements TypedFeature {
-                constructor() {}
-                
-                describeFeature() {
-                    console.log(`state=[permissioned]\tmessage=[I don't have a message, you need permissions for me]`);
-                }
-                
-            }
-            ```
+           constructor(message: string) {
+               this.message = message;
+           }
+           
+           describeFeature() {
+               console.log(`state=[default]\tmessage=[${this.message}] will be defaulted.`);
+           }
+       }
 
-        Explanation: These classes implement the interface in the next bullet point. These classes simply implement a `console.log` to distinguish between the different implementations of the interfaces.
+       // Implementation class Permission
+       class PermissionedFeature implements TypedFeature {
+           constructor() {}
+           
+           describeFeature() {
+               console.log(`state=[permissioned]\tmessage=[I don't have a message, you need permissions for me]`);
+           }
+           
+       }
+       ```
 
- 3. Interface
+       Explanation: These classes implement the interface in the next bullet point. These classes simply implement a `console.log` to distinguish between the different implementations of the interfaces.
+3. Interface
 
 `Caveat:` Because we are using a typed language, we also must provide some sort of interface so that the compiler can understand the different methods available for the calling class. This would not be necessary if we were to use a language like Javascript.
 
-- Implementation of the interface for the first two strategies
-    - Code
+* Implementation of the interface for the first two strategies
 
-        ```tsx
-        interface TypedFeature {
-          describeFeature(): void;
-        }
-        ```
+  * Code
+
+    ```tsx
+    interface TypedFeature {
+      describeFeature(): void;
+    }
+    ```
 
 [Full repl.it  available here](https://repl.it/@ewhipp/Factories-in-Typescript)
 
@@ -244,8 +243,9 @@ Explanation: The above code snippet does the following:
 1. Create a module or namespace that can be used to give a specific scope that is different from the global scope. This is so that we do not have conflicts if we are to use this strategy for other parts of the domain our code set is working within.
 2. Generate a [Typescript type alias](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-aliases) that defines the compositional characters of a Constructor in Typescript
 3. Declare an array that will hold all implementations of the `TypedFeature` interface
-    1. Declare a Getter for the array
-    2. Declare a register decorator that will only work if placed upon a class that properly implements the `TypedFeature` interface
+
+   1. Declare a Getter for the array
+   2. Declare a register decorator that will only work if placed upon a class that properly implements the `TypedFeature` interface
 
 ### Implementing the Factory Pattern
 
@@ -254,8 +254,9 @@ Next, we need to implement a factory pattern that can leverage the changes above
 We will do this through the following:
 
 1. Create a private map that will be based on the following key-value pairs
-    1. key: the string returned by the `support()` method of the `TypedFeature`
-    2. value: the implementation of the `TypedFeature`
+
+   1. key: the string returned by the `support()` method of the `TypedFeature`
+   2. value: the implementation of the `TypedFeature`
 2. During construction of the factory map, return all implementations of `TypedFeature`s through the module method `TypedFeature.GetImplementations()`
 3. Construct the implementation of the `TypedFeature`
 4. Utilize the method `setDependencies()` to ensure the constructed implementation has all that is necessary to function properly
@@ -296,100 +297,97 @@ class DynamicFactory {
 With the construction of our factory, we can now create implementations of our interfaces without ever needing a code change to the factory class itself. This does the following:
 
 1. Consolidates implementation details to the interface implementation classes themselves
-    1. Notice support() determines the return implementation rather than the string value in the factory
+
+   1. Notice support() determines the return implementation rather than the string value in the factory
 2. We no longer need to update the Factory class to add a new possible implementation; this is completed by means of the Decorator
 
 The following are examples of the code necessary to generate a new `TypedFeature` in this implementation strategy.
 
-- Example 1
+* Example 1
 
-    ```tsx
-    @TypedFeature.register
-    class DefaultFeature implements TypedFeature {
-       
-       private message: string;
+  ```tsx
+  @TypedFeature.register
+  class DefaultFeature implements TypedFeature {
+     
+     private message: string;
 
-      support(): string { return PublishConstants.DEFAULT }
-        constructor(message: string) {
-            this.message = message;
-        }
+    support(): string { return PublishConstants.DEFAULT }
+      constructor(message: string) {
+          this.message = message;
+      }
 
-        setDependencies() { 
-          this.message = 'default';
-        }
-        
-        describeFeature() {
-            console.log(`state=[default]\tmessage=[${this.message}] will be defaulted.`);
-        }
-    }
-    ```
+      setDependencies() { 
+        this.message = 'default';
+      }
+      
+      describeFeature() {
+          console.log(`state=[default]\tmessage=[${this.message}] will be defaulted.`);
+      }
+  }
+  ```
+* Example 2
 
-- Example 2
+  ```tsx
+  @TypedFeature.register
+  class ExperimentalFeature3 implements TypedFeature {
+    private message: string;
 
-    ```tsx
-    @TypedFeature.register
-    class ExperimentalFeature3 implements TypedFeature {
-      private message: string;
+    support(): string { return PublishConstants.EXPERIMENTAL}
 
-      support(): string { return PublishConstants.EXPERIMENTAL}
+      constructor(message: string) {
+          this.message = message;    
+      }
 
-        constructor(message: string) {
-            this.message = message;    
-        }
+      setDependencies() { this.message = 'experimental';
+      }
+      
+      describeFeature() {
+          console.log(`state=[experimental]\tmessage=[${this.message}]`);
+      }
+  }
+  ```
+* Example 3
 
-        setDependencies() { this.message = 'experimental';
-        }
-        
-        describeFeature() {
-            console.log(`state=[experimental]\tmessage=[${this.message}]`);
-        }
-    }
-    ```
+  ```tsx
+  @TypedFeature.register
+  class PermissionedFeature3 implements TypedFeature {
+      constructor() {}
 
-- Example 3
-
-    ```tsx
-    @TypedFeature.register
-    class PermissionedFeature3 implements TypedFeature {
-        constructor() {}
-
-        setDependencies() { }
-        
-        support(): string { return ''; }
-        describeFeature() {
-            console.log(`state=[permissioned]\tmessage=[I don't have a message, you need permissions for me]`);
-        }
-        
-    }
-    ```
+      setDependencies() { }
+      
+      support(): string { return ''; }
+      describeFeature() {
+          console.log(`state=[permissioned]\tmessage=[I don't have a message, you need permissions for me]`);
+      }
+      
+  }
+  ```
 
 ## Layer of Indirections
 
 With these three examples we can see how layers of indirection allow us to generate multiple different implementation strategies without having to change higher level modules. This allows us a firm cutoff at different points in logic flow throughout our code bases. This provides us some ability to reason with where bugs might occur in our code set based on the feature we are working with, more control over dependencies, and easier testability through code segregation.
 
-- If calling class
+* If calling class
 
-    ```tsx
-    const ifFeatureFactory = new IfFeatureFactory();
-    const experimentalFeature = ifFeatureFactory.getFeature(PublishConstants.EXPERIMENTAL);
-    experimentalFeature.describeFeature();
-    ```
+  ```tsx
+  const ifFeatureFactory = new IfFeatureFactory();
+  const experimentalFeature = ifFeatureFactory.getFeature(PublishConstants.EXPERIMENTAL);
+  experimentalFeature.describeFeature();
+  ```
+* Case calling class
 
-- Case calling class
+  ```tsx
+  const caseFeatureFactory = new CaseFeatureFactory();
+  const experimentalFeature = caseFeatureFactory.getFeature(PublishConstants.EXPERIMENTAL);
+  experimentalFeature.describeFeature();
+  ```
+* Dynamic calling class
 
-    ```tsx
-    const caseFeatureFactory = new CaseFeatureFactory();
-    const experimentalFeature = caseFeatureFactory.getFeature(PublishConstants.EXPERIMENTAL);
-    experimentalFeature.describeFeature();
-    ```
-
-- Dynamic calling class
-
-    ```tsx
-    const dynamicFactory = new DynamicFactory();
-    const experimentalFeature = dynamicFactory.get(PublishConstants.EXPERIMENTAL);
-    experimentalFeature.describeFeature();
-    ```
+  ```tsx
+  const dynamicFactory = new DynamicFactory();
+  const experimentalFeature = dynamicFactory.get(PublishConstants.EXPERIMENTAL);
+  experimentalFeature.describeFeature();
+  ```
 
 ## Takeaways
 
@@ -397,10 +395,11 @@ The three implementation strategies depicted here are work towards the same outc
 
 1. Provide a layer of indirection between caller classes and the implementation code 
 2. This layer provides
-    1. Easier testability
-    2. Separation of Responsibilities
-    3. Flexibility
-    4. Easier ability to debug and find errors
+
+   1. Easier testability
+   2. Separation of Responsibilities
+   3. Flexibility
+   4. Easier ability to debug and find errors
 
 The key difference between the 1st and 2nd pattern with the 3rd pattern is that the 1st and 2nd pattern require the software engineer to maintain
 
