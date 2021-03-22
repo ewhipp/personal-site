@@ -1,7 +1,7 @@
 ---
 template: blog-post
 title: Simplified Reusability in Typescript
-slug: simplified-reusability-in-typescript
+slug: /simplified-reusability-in-typescript
 date: 2021-03-21 15:47
 description: How do you simplify you typescript software system? What are the
   different ways Software Engineers can leverage patterns to simplify the
