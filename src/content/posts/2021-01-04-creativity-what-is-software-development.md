@@ -1,7 +1,7 @@
 ---
 template: blog-post
 title: Creativity | What is Software Development?
-slug: creativity-what-is-software-development
+slug: /creativity-what-is-software-development
 date: 2021-01-03 21:25
 description: What is Software Development, really? Is it as ingrained in the
   boring and mundane as society thinks? I disagree.
