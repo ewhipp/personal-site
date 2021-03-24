@@ -3,7 +3,7 @@ template: about-page
 slug: /about
 title: About
 ---
-![Erik Whipp professional picture](/assets/professional-pic.jpeg)
+![](/assets/professional-pic.jpeg)
 
 I am a software engineer who has worked in multiple roles from database administration, IT infrastructure, devops (Kubernetes, Docker, Spinnaker, Jenkins, Sonarqube), and software engineering.
 
