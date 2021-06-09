@@ -32,7 +32,6 @@ const Layout = ({children, className, props}) => {
     <div className="primary-container">
       <Header>
         <Logo title={siteTitle} />
-        <Navigation/>
         <div sx={layoutStyle.theme}>
           <Theme/>
         </div>

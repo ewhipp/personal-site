@@ -2,11 +2,19 @@
 @import "defaults";
 @import "lib/css-grid-utility";
 
+
 // .primary-container {
 // 	display: grid;
 // 	grid-template-rows: 60px auto 60px;
 // 	min-height: 100vh;
 // }
+.fadeIn{
+     opacity:1;
+     width:100px;
+     height:100px;
+     transition: width 0.5s, height 0.5s, opacity 0.5s 0.5s;
+
+}
 .primary-container main {
 	min-height: calc(100vh - 60px - 81px);
 }
@@ -74,7 +82,7 @@
       top: 100%;
       z-index: 1;
       width: 100%;
-			max-width: 320px;    
+			max-width: 320px;
 			border-radius: 0 0 0 12px;
       overflow: hidden;
     }
@@ -160,7 +168,7 @@
 		margin: 0 0 3px;
 		font-size: 20px;
 		font-weight: 600;
-		// a { 
+		// a {
 		// 	color: var(--post-link-color);
 		// }
 	}
@@ -247,7 +255,7 @@ article img {
 		border-radius: 12px;
 	}
 }
-// Buttons 
+// Buttons
 .button {
 	--padding: 20px;
 	--margin: 20px;
@@ -428,4 +436,3 @@ article img {
 
 // Libraries
 @import "lib/prism-default"
-

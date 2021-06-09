@@ -1,60 +1,42 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
-import { graphql, Link } from "gatsby"
-import { RiArrowRightSLine } from "react-icons/ri"
+import React from "react"
+import Emoji from "../components/emoji"
+import Footer from "../components/footer"
+import Fade from "react-reveal/Fade";
+import Rotate from "react-reveal/Rotate"
+import { Link } from "gatsby"
 
-import Layout from "../components/layout"
-import BlogListHome from "../components/blog-list-home"
 import SEO from "../components/seo"
 
-export const pageQuery = graphql`
-  query HomeQuery($id: String!){
-		markdownRemark(id: { eq: $id }) {
-      id
-      html
-      frontmatter {
-        title
-        tagline
-        cta {
-          ctaText
-          ctaLink
-        }
-      }
-    }
-  }
-`
-
-const HomePage = ({ data }) => {
-  const { markdownRemark } = data // data.markdownRemark holds your post data
-  const { frontmatter, html } = markdownRemark
+const HomePage = () => {
 	return (
-		<Layout>
+    <>
       <SEO/>
-      <div className="home-banner grids col-1 sm-1">
+
+      <div className="wrapper" style={{
+        display: "flex",
+        height: "100vh",
+        justifyContent: "center",
+        alignItems: "center",
+        flexDirection: "column",
+        fontSize: 30
+      }}>
+        <Fade>
+          <div>
+            <Emoji symbol="👋" label="hand wave emoji" /> I'm Erik
+          </div>
+        </Fade>
+        <Rotate bottom left>
         <div>
-          <h1 class="title">{frontmatter.title}</h1>
-          <p 
-            class="tagline"
-            sx={{
-              color: 'muted'
-            }}
-          >
-            {frontmatter.tagline}
-          </p>
-          <div className="description" dangerouslySetInnerHTML={{__html: html}}/>
-          <Link 
-            to={frontmatter.cta.ctaLink} 
-            className="button"
-            sx={{
-              variant: 'links.button'
-            }}
-          >
-            {frontmatter.cta.ctaText}<span class="icon -right"><RiArrowRightSLine/></span>
-          </Link>
-        </div>
+          <Link to="/about">About</Link> | <Link to="/blog">Blog</Link> |
+          <a href="https://www.github.com/ewhipp" target="_blank">Github</a>
+          </div>
+          </Rotate>
       </div>
-      <BlogListHome/>
-		</Layout>
+
+      <Footer/>
+    </>
 	)
 }
 
